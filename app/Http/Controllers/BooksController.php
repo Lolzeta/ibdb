@@ -37,13 +37,14 @@ class BooksController extends Controller
     {
         request()->validate([
           'title'       =>    'required|min:3',
-          'author'      =>    'required',
+          'author'      =>    'required|min:3',
           'description' =>    'required'
         ], [
           'title.required'          =>   'El titulo es necesario',
           'title.min'               =>   'El titulo debe de tener minimo tres caracteres',
           'author.required'         =>   'El autor es necesario',
-          'description.required'    =>   'La descripcion es necesaria',
+          'author.min'              =>   'El autor debe tener minimo tres caracteres',
+          'description.required'    =>   'La descripcion es necesaria'
         ]);
       Book::create([
         'title' => request('title'),
@@ -92,13 +93,14 @@ class BooksController extends Controller
         //$book = Book::findOrFail($id);
         request()->validate([
           'title'       =>    'required|min:3',
-          'author'      =>    'required',
+          'author'      =>    'required|min:3',
           'description' =>    'required'
         ], [
           'title.required'          =>   'El titulo es necesario',
           'title.min'               =>   'El titulo debe de tener minimo tres caracteres',
           'author.required'         =>   'El autor es necesario',
-          'description.required'    =>   'La descripcion es necesaria',
+          'author.min'              =>   'El autor debe tener minimo tres caracteres',
+          'description.required'    =>   'La descripcion es necesaria'
         ]);
         $book->update([
         'title' => request('title'),
