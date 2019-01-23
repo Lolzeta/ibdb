@@ -20,6 +20,7 @@
                       Books
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{ route('books.index') }}">List</a>
                       <a class="dropdown-item" href="{{ route('books.create') }}">Create</a>
                     </div>
                 </li>

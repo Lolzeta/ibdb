@@ -11,11 +11,7 @@ class PagesController extends Controller
      */
     public function index()
     {
-      $books = \App\Book::all();
-
-      //return view('public.index', ['books' => $libros]);
-      //return view('public.index', compact('books'));
-      return view('public.pages.index')->withBooks($books);
+      return view('public.pages.index');
     }
 
     public function contact()

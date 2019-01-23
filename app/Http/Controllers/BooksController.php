@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
+use App\Http\Requests\BookRequest;
 
 class BooksController extends Controller
 {
@@ -14,7 +15,8 @@ class BooksController extends Controller
      */
     public function index()
     {
-        return redirect('/');
+      $books = Book::paginate(10);
+      return view('public.books.index')->withBooks($books);
     }
 
     /**
@@ -33,19 +35,8 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(BookRequest $request)
     {
-        request()->validate([
-          'title'       =>    'required|min:3',
-          'author'      =>    'required|min:3',
-          'description' =>    'required'
-        ], [
-          'title.required'          =>   'El titulo es necesario',
-          'title.min'               =>   'El titulo debe de tener minimo tres caracteres',
-          'author.required'         =>   'El autor es necesario',
-          'author.min'              =>   'El autor debe tener minimo tres caracteres',
-          'description.required'    =>   'La descripcion es necesaria'
-        ]);
       Book::create([
         'title' => request('title'),
         'slug' => str_slug(request('title'),'-'),
@@ -88,20 +79,9 @@ class BooksController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Book $book)
+    public function update(BookRequest $request, Book $book)
     {
-        //$book = Book::findOrFail($id);
-        request()->validate([
-          'title'       =>    'required|min:3',
-          'author'      =>    'required|min:3',
-          'description' =>    'required'
-        ], [
-          'title.required'          =>   'El titulo es necesario',
-          'title.min'               =>   'El titulo debe de tener minimo tres caracteres',
-          'author.required'         =>   'El autor es necesario',
-          'author.min'              =>   'El autor debe tener minimo tres caracteres',
-          'description.required'    =>   'La descripcion es necesaria'
-        ]);
+
         $book->update([
         'title' => request('title'),
         'slug' => str_slug(request('title'),'-'),
